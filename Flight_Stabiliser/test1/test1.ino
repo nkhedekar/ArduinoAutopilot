@@ -62,7 +62,7 @@ double setPitch = 90, setRoll = 90, pitchOut, rollOut;
 double doubleP, doubleR;
 double Kp=2, Ki=5, Kd=1;
 PID pitchPID(&doubleP, &pitchOut, &setPitch, Kp, Ki, Kd, DIRECT);
-PID rollPID(&doubleR, &pitchOut, &setRoll, Kp, Ki, Kd, DIRECT);
+PID rollPID(&doubleR, &rollOut, &setRoll, Kp, Ki, Kd, DIRECT);
 
 
 //***************************************************************
