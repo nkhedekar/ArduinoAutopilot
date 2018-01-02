@@ -185,7 +185,16 @@ void loop() {
   //calculate correction value 
   pitchPID.Compute();
   rollPID.Compute();
-  
+  if(rollOut>=90){
+    rollOut = min(180, rollOut);  
+  }else{
+    rollOut = max(0, rollOut);
+  }
+  if(pitchOut>=90){
+    pitchOut = min(180, pitchOut);  
+  }else{
+    pitchOut = max(0, pitchOut);
+  }
   //write correction value 
   sAileron.write(rollOut);
   sElevator.write(pitchOut);    
