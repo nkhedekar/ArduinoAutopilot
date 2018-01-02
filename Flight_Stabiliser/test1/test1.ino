@@ -58,7 +58,7 @@ int inA = 8, inE = 9, inT = 10, inR = 11, inAux1 = 12;
 
 //******************************PID******************************
 
-double setPitch = 0, setRoll = 0, pitchOut, rollOut;
+double setPitch = 90, setRoll = 90, pitchOut, rollOut;
 double doubleP, doubleR;
 double Kp=2, Ki=5, Kd=1;
 PID pitchPID(&doubleP, &pitchOut, &setPitch, Kp, Ki, Kd, DIRECT);
@@ -135,7 +135,6 @@ void setup() {
     }
   pitchPID.SetMode(AUTOMATIC);
   rollPID.SetMode(AUTOMATIC);
-    
 }
 
 void loop() {  
@@ -181,13 +180,13 @@ void loop() {
   Serial.print(ypr[1] * 180/M_PI);
   Serial.print("\t");
   Serial.println(ypr[2] * 180/M_PI);
-  doubleP = (double) ypr[1]*180/M_PI;
-  doubleR = (double) ypr[2]*180/M_PI;
+  doubleP = (double) (ypr[1]*180/M_PI + 180)/2;
+  doubleR = (double) (ypr[2]*180/M_PI + 180)/2;
   //calculate correction value 
   pitchPID.Compute();
   rollPID.Compute();
   
-  //write correction value
+  //write correction value 
   sAileron.write(rollOut);
   sElevator.write(pitchOut);    
 }
